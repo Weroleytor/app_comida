@@ -11,13 +11,13 @@ const routes: Routes = [
         component: PagesComponent,
         children: [
             { path: '', loadChildren: () => import('./pages/login/login.module').then((m) => m.LoginModule) },
-            
             { path: 'about', loadChildren: () => import('./pages/about/about.module').then((m) => m.AboutModule) },
             { path: 'contact', loadChildren: () => import('./pages/contact/contact.module').then((m) => m.ContactModule) },
             { path: 'menu', loadChildren: () => import('./pages/menu/menu.module').then((m) => m.MenuModule) },
             { path: 'chefs', loadChildren: () => import('./pages/chefs/chefs.module').then((m) => m.ChefsModule) },
             { path: 'reservation', loadChildren: () => import('./pages/reservation/reservation.module').then((m) => m.ReservationModule) },
             { path: 'categories', loadChildren: () => import('./pages/categories/categories.module').then((m) => m.CategoriesModule) },
+            { path: 'restaurants', loadChildren: () => import('./pages/restaurants/restaurant.module').then((m) => m.RestaurantsModule) },
             { path: 'account', loadChildren: () => import('./pages/account/account.module').then((m) => m.AccountModule) },
             { path: 'cart', loadChildren: () => import('./pages/cart/cart.module').then((m) => m.CartModule) },
             { path: 'checkout', loadChildren: () => import('./pages/checkout/checkout.module').then((m) => m.CheckoutModule) },

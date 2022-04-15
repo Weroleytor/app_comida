@@ -1,10 +1,8 @@
 import { Component, OnInit, ViewChild, HostListener, ViewChildren, QueryList } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { AppSettings, Settings } from 'src/app/app.settings';
-import { AppService } from 'src/app/app.service';
-import { MenuItem } from 'src/app/app.models';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RestaurantService } from '../../restaurants/restaurant.service';
+import { Restaurant } from '../../restaurants/restaurants';
+import { CategoriesService } from '../categories.service';
 
 @Component({
   selector: 'app-category-single',
@@ -13,18 +11,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class CategorySingleComponent implements OnInit {
   private sub: any;
-  public menuItem!: MenuItem;
-  public settings: Settings;
-  public quantityCount: number = 1;
-  public relatedMenuItems: Array<MenuItem> = [];
 
-  constructor(public appSettings: AppSettings, public appService: AppService, private activatedRoute: ActivatedRoute, public fb: FormBuilder, public snackBar: MatSnackBar) {
-    this.settings = this.appSettings.settings;
-  }
+  public restaurants!: Restaurant[];
+
+  public totalResults: number = 0;
+
+  public currentCategory!: any;
+
+  constructor(public categoriesService: CategoriesService, public restaurantService: RestaurantService, private activatedRoute: ActivatedRoute, public router: Router) {}
 
   ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe((params) => {
-      this.getMenuItemById(params['id']);
+      this.getRestaurantsByCategory(params['id']);
+      this.getCategory(params['id']);
     });
   }
 
@@ -32,16 +31,25 @@ export class CategorySingleComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
-  public getMenuItemById(id: number) {
-    const index: number = this.appService.Data.cartList.findIndex((item) => item.id == id);
-    if (index !== -1) {
-      this.menuItem = this.appService.Data.cartList[index];
-      this.quantityCount = this.menuItem.cartCount;
-    } else {
-      this.appService.getMenuItemById(id).subscribe((data) => {
-        this.menuItem = data;
-    console.log(this.menuItem);
-  });
-    }
+  public getCategory(categoryId: number) {
+    this.categoriesService.getCategories().subscribe((categories) => {
+      this.currentCategory = categories.find((category) => {
+        return category.id === (Number(categoryId));
+      });
+    });
+  }
+
+  public getRestaurantsByCategory(categoryId: number) {
+    this.restaurantService.getRestaurants().subscribe((restaurants) => {
+      this.restaurants = restaurants.filter((restaurant) => {
+        return restaurant.categories.includes(Number(categoryId));
+      });
+
+      this.totalResults = this.restaurants.length;
+    });
+  }
+
+  public onReturn() {
+    this.router.navigate(['/categories']);
   }
 }
