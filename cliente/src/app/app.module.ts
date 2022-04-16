@@ -38,6 +38,7 @@ import { HorizontalMenuComponent } from './theme/components/menu/horizontal-menu
 import { VerticalMenuComponent } from './theme/components/menu/vertical-menu/vertical-menu.component';
 import { FooterComponent } from './theme/components/footer/footer.component';
 import { LockScreenComponent } from './pages/lock-screen/lock-screen.component';
+import { MenuService } from './theme/components/menu/menu.service';
 
 @NgModule({
   declarations: [AppComponent, PagesComponent, NotFoundComponent, UserMenuComponent, ContactsComponent, Toolbar1Component, HorizontalMenuComponent, VerticalMenuComponent, FooterComponent, LockScreenComponent],
@@ -61,7 +62,14 @@ import { LockScreenComponent } from './pages/lock-screen/lock-screen.component';
     AppRoutingModule,
     SharedModule,
   ],
-  providers: [AppSettings, { provide: OverlayContainer, useClass: CustomOverlayContainer }, { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }, DatePipe, { provide: MatPaginatorIntl, useClass: MatPaginatorI18nService }],
+  providers: [
+    MenuService,
+    AppSettings,
+    { provide: OverlayContainer, useClass: CustomOverlayContainer },
+    { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },
+    DatePipe,
+    { provide: MatPaginatorIntl, useClass: MatPaginatorI18nService },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

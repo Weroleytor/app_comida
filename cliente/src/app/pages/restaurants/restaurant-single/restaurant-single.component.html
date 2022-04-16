@@ -57,7 +57,7 @@
   <div class="content">
     <div class="menu-category">
       <h1>Super cheese</h1>
-      <div class="menu-item">
+      <div [routerLink]="['/restaurants/plate', 1]" class="menu-item">
         <div class="menu-info">
           <h2>Pizza Super Cheese Pepperoni</h2>
           <span class="price">$10.00</span>
@@ -95,3 +95,4 @@
     </div>
   </div>
 </div>
+<div (click)="openCart()" class="view-cart">Mirar carrito (1)</div>

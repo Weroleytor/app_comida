@@ -4,10 +4,17 @@ import { Location } from '@angular/common';
 
 import { Menu } from './menu.model';
 import { verticalMenuItems, horizontalMenuItems } from './menu';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class MenuService {
+  public callToggleMenu = new Subject<any>();
+
   constructor(private location: Location, private router: Router) {}
+
+  public toggleMenu(input: boolean) {
+    this.callToggleMenu.next(input);
+  }
 
   public getVerticalMenuItems(): Array<Menu> {
     return verticalMenuItems;
@@ -34,6 +41,7 @@ export class MenuService {
   public toggleMenuItem(menuId: number) {
     let menuItem = document.getElementById('menu-item-' + menuId);
     let subMenu = document.getElementById('sub-menu-' + menuId);
+
     if (subMenu) {
       if (subMenu.classList.contains('show')) {
         subMenu.classList.remove('show');

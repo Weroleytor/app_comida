@@ -208,7 +208,7 @@ img {
 .more-info {
   position: absolute;
   right: 24px;
-  top: 200px;
+  top: 230px;
   font-size: 40px;
 }
 
@@ -254,5 +254,21 @@ img {
 }
 
 .hide {
-    visibility: hidden;
+  visibility: hidden;
+}
+
+.view-cart {
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 55px;
+  font-size: 15px;
+  position: fixed;
+  width: calc(100% - 10px);
+  right: 5px;
+  left: 5px;
+  bottom: 10px;
 }

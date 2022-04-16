@@ -5,14 +5,16 @@ import { SharedModule } from '../../shared/shared.module';
 import { PipesModule } from '../../theme/pipes/pipes.module';
 import { CategoriesComponent } from '../categories/categories.component';
 import { RestaurantSingleComponent } from './restaurant-single/restaurant-single.component';
+import { PlateComponent } from './plate/plate.component';
 
 export const routes = [
   { path: '', component: CategoriesComponent, pathMatch: 'full' },
   { path: ':id', component: RestaurantSingleComponent },
+  { path: 'plate/:id', component: PlateComponent },
 ];
 
 @NgModule({
-  declarations: [RestaurantSingleComponent],
+  declarations: [RestaurantSingleComponent, PlateComponent],
   imports: [CommonModule, RouterModule.forChild(routes), SharedModule, PipesModule],
 })
 export class RestaurantsModule {}

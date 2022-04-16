@@ -38,7 +38,11 @@
   }
 
   .mat-badge-content {
-    top: -7px !important;
+    top: 0px !important;
+    width: 14px !important;
+    height: 14px !important;
+    font-size: 10px !important;
+    line-height: 15px !important;
   }
 }
 
